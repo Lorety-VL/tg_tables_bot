@@ -25,7 +25,7 @@ docker build -t tg_tables_bot .
 ## Run docker:
 
 ```sh
-docker run -d --rm --name my-bot --env-file .env tg_tables_bot
+docker run -d --rm --name tg_tables_bot --env-file .env tg_tables_bot
 ```
 
 ## To stop this bot
