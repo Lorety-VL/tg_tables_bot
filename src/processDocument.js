@@ -35,6 +35,33 @@ export default async (fileStream, fileName) => {
     { header: 'Сотрудник', key: 'employee' },
   ];
 
+  // Получаем заголовки входной таблицы
+  const headerRow = inputWorksheet.getRow(1);
+  const columnIndices = { //  В некоторых ячейках выгрузки пробелы другого типа, это решают регулярки
+    adNumber: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Номер объявления'),
+    region: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Регион размещения'),
+    city: headerRow.values.findIndex((value) => value === 'Город'),
+    address: headerRow.values.findIndex((value) => value === 'Адрес'),
+    category: headerRow.values.findIndex((value) => value === 'Категория'),
+    subcategory: headerRow.values.findIndex((value) => value === 'Подкатегория'),
+    parameter: headerRow.values.findIndex((value) => value === 'Параметр'),
+    adName: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Название объявления'),
+    firstPublicationDate: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Дата первой публикации'),
+    withdrawalDate: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Дата снятия с публикации'),
+    employee: headerRow.values.findIndex((value) => value === 'Сотрудник'),
+    viewsCount: headerRow.values.findIndex((value) => value === 'Просмотры'),
+    contacts: headerRow.values.findIndex((value) => value === 'Контакты'),
+    likesCount: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Добавили в избранное'),
+    adExpences: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Расходы на объявления'),
+    deletedBonuses: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Списано бонусов на объявления'),
+    placementAndActionsExpences: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Расходы на размещение и целевые действия'),
+    promotionExpences: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Расходы на продвижение'),
+    otherExpences: headerRow.values.findIndex((value) => value?.replace(/\s+/g, ' ') === 'Остальные расходы'),
+  };
+
+  console.log(columnIndices);
+  
+
   // Обходим каждую строку входной таблицы
   inputWorksheet.eachRow((inputRow, rowNumber) => {
     if (rowNumber === 1) { // Пропускаем заголовок
@@ -42,25 +69,25 @@ export default async (fileStream, fileName) => {
     }
 
     const inputData = {
-      adNumber: inputRow.getCell('A').value,
-      region: inputRow.getCell('B').value,
-      city: inputRow.getCell('C').value,
-      address: inputRow.getCell('D').value,
-      category: inputRow.getCell('E').value,
-      subcategory: inputRow.getCell('F').value,
-      parameter: inputRow.getCell('G').value,
-      adName: inputRow.getCell('H').value,
-      firstPublicationDate: inputRow.getCell('J').value,
-      withdrawalDate: inputRow.getCell('K').value,
-      employee: inputRow.getCell('L').value,
-      viewsCount: inputRow.getCell('N').value,
-      contacts: inputRow.getCell('Q').value,
-      likesCount: inputRow.getCell('W').value,
-      adExpences: inputRow.getCell('X').value,
-      deletedBonuses: inputRow.getCell('Y').value,
-      placementAndActionsExpences: inputRow.getCell('Z').value,
-      promotionExpences: inputRow.getCell('AA').value,
-      otherExpences: inputRow.getCell('AB').value,
+      adNumber: inputRow.getCell(columnIndices.adNumber).value,
+      region: inputRow.getCell(columnIndices.region).value,
+      city: inputRow.getCell(columnIndices.city).value,
+      address: inputRow.getCell(columnIndices.address).value,
+      category: inputRow.getCell(columnIndices.category).value,
+      subcategory: inputRow.getCell(columnIndices.subcategory).value,
+      parameter: inputRow.getCell(columnIndices.parameter).value,
+      adName: inputRow.getCell(columnIndices.adName).value,
+      firstPublicationDate: inputRow.getCell(columnIndices.firstPublicationDate).value,
+      withdrawalDate: inputRow.getCell(columnIndices.withdrawalDate).value,
+      employee: inputRow.getCell(columnIndices.employee).value,
+      viewsCount: inputRow.getCell(columnIndices.viewsCount).value,
+      contacts: inputRow.getCell(columnIndices.contacts).value,
+      likesCount: inputRow.getCell(columnIndices.likesCount).value,
+      adExpences: inputRow.getCell(columnIndices.adExpences).value,
+      deletedBonuses: inputRow.getCell(columnIndices.deletedBonuses).value,
+      placementAndActionsExpences: inputRow.getCell(columnIndices.placementAndActionsExpences).value,
+      promotionExpences: inputRow.getCell(columnIndices.promotionExpences).value,
+      otherExpences: inputRow.getCell(columnIndices.otherExpences).value,
     };
 
     // Преобразуем данные

@@ -34,7 +34,7 @@ export default async (token) => {
       bot.sendMessage(chatId, 'Ваш файл успешно обработан!');
     } catch (error) {
       console.error('Ошибка при обработке файла:', error);
-      bot.sendMessage(chatId, 'Произошла ошибка при обработке файла.');
+      bot.sendMessage(chatId, 'Произошла ошибка при обработке файла.' + error);
     }
   });
 };
