@@ -52,14 +52,15 @@ export default async (fileStream, fileName) => {
       adName: inputRow.getCell('H').value,
       firstPublicationDate: inputRow.getCell('J').value,
       withdrawalDate: inputRow.getCell('K').value,
-      viewsCount: inputRow.getCell('M').value,
-      contacts: inputRow.getCell('P').value,
-      likesCount: inputRow.getCell('V').value,
-      adExpences: inputRow.getCell('W').value,
-      deletedBonuses: inputRow.getCell('X').value,
-      placementAndActionsExpences: inputRow.getCell('Y').value,
-      promotionExpences: inputRow.getCell('Z').value,
-      otherExpences: inputRow.getCell('AA').value,
+      employee: inputRow.getCell('L').value,
+      viewsCount: inputRow.getCell('N').value,
+      contacts: inputRow.getCell('Q').value,
+      likesCount: inputRow.getCell('W').value,
+      adExpences: inputRow.getCell('X').value,
+      deletedBonuses: inputRow.getCell('Y').value,
+      placementAndActionsExpences: inputRow.getCell('Z').value,
+      promotionExpences: inputRow.getCell('AA').value,
+      otherExpences: inputRow.getCell('AB').value,
     };
 
     // Преобразуем данные
@@ -81,7 +82,7 @@ export default async (fileStream, fileName) => {
       allCost: inputData.adExpences,
       costWitheoutBonuses: inputData.adExpences - inputData.deletedBonuses,
       likesCount: inputData.likesCount,
-      employee: 'Менеджер',
+      employee: inputData.employee,
     };
 
     // Вставляем данные в выходную таблицу
